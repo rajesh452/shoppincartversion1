@@ -22,7 +22,7 @@ public class SupplierTest {
 		supplier.setName("su356");
 		supplier.setAddress("suppdes120");
 		
- 
+		
 		supplierDAO.saveOrUpdate(supplier);
 
 	

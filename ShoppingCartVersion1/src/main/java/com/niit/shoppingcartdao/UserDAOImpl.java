@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcartversionmodel.Category;
+import com.niit.shoppingcartversionmodel.User;
 
-@Repository("categoryDAO")
-public class CategoryDAOImpl implements CategoryDAO {
-	public List<Category> list() {
+@Repository("userDAO")
+public class UserDAOImpl implements UserDAO {
+	public List<User> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,43 +24,43 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public CategoryDAOImpl(SessionFactory sessionFactory) {
+	public UserDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public void saveOrUpdate(Category category) {
+	public void saveOrUpdate(User user) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().saveOrUpdate(category);
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 		
 	}
 	@Transactional
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		Category CategoryToDelete = new Category();
-		CategoryToDelete.setId(id);
-		sessionFactory.getCurrentSession().delete(CategoryToDelete);
+		User UserToDelete = new User();
+		UserToDelete.setId(id);
+		sessionFactory.getCurrentSession().delete(UserToDelete);
 		
 	}
 	@Transactional
-	public List<Category> listCategory() {
+	public List<User> listUser() {
 		@SuppressWarnings("unchecked")
-		List<Category> listCategory = (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class)
+		List<User> listUser = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return listCategory;
+		return listUser;
 	}
 	
 	
 	
 @Transactional
-	public Category get(String id) {
-		String hql = "from Category where id=" + "'" + id + "'";
+	public User get(String id) {
+		String hql = "from User where id=" + "'" + id + "'";
 		Query query =sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<Category> listCategory =query.list();
+		List<User> listUser =query.list();
 
-		if (listCategory != null && !listCategory.isEmpty()) {
-			return listCategory.get(0);
+		if (listUser != null && !listUser.isEmpty()) {
+			return listUser.get(0);
 		}
 	
 		// TODO Auto-generated method stub

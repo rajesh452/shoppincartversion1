@@ -8,14 +8,15 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.shoppingcartversionmodel.Category;
+import com.niit.shoppingcartversionmodel.Product;
 
-@Repository("categoryDAO")
-public class CategoryDAOImpl implements CategoryDAO {
-	public List<Category> list() {
+@Repository("productDAO")
+public class ProductDAOImpl implements ProductDAO {
+	public List<Product> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,12 +25,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public CategoryDAOImpl(SessionFactory sessionFactory) {
+	public ProductDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public void saveOrUpdate(Category category) {
+	public void saveOrUpdate(Product category) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().saveOrUpdate(category);
 		
@@ -37,30 +38,30 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Transactional
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		Category CategoryToDelete = new Category();
-		CategoryToDelete.setId(id);
-		sessionFactory.getCurrentSession().delete(CategoryToDelete);
+		Product ProductToDelete = new Product();
+		ProductToDelete.setId(id);
+		sessionFactory.getCurrentSession().delete(ProductToDelete);
 		
 	}
 	@Transactional
-	public List<Category> listCategory() {
+	public List<Product> listProduct() {
 		@SuppressWarnings("unchecked")
-		List<Category> listCategory = (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class)
+		List<Product> listProduct = (List<Product>) sessionFactory.getCurrentSession().createCriteria(Product.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		return listCategory;
+		return listProduct;
 	}
 	
 	
 	
 @Transactional
-	public Category get(String id) {
-		String hql = "from Category where id=" + "'" + id + "'";
+	public Product get(String id) {
+		String hql = "from Product where id=" + "'" + id + "'";
 		Query query =sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<Category> listCategory =query.list();
+		List<Product> listProduct =query.list();
 
-		if (listCategory != null && !listCategory.isEmpty()) {
-			return listCategory.get(0);
+		if (listProduct != null && !listProduct.isEmpty()) {
+			return listProduct.get(0);
 		}
 	
 		// TODO Auto-generated method stub
